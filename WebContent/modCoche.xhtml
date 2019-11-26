@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title"> Modificar coche: </ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Año"></h:outputText>
+				<h:inputText id="nombre" value="#{altaCocheBean.anyo}" />
+				<h:outputText value="Nivel de confort" />
+				<h:selectOneMenu value="#{altaCocheBean.nivelConfort}">
+					<f:selectItem itemValue="1" itemLabel="Muy incomodo" />
+					<f:selectItem itemValue="2" itemLabel="Incomodo" />
+					<f:selectItem itemValue="3" itemLabel="Está bien" />
+					<f:selectItem itemValue="4" itemLabel="Confortable" />
+					<f:selectItem itemValue="5" itemLabel="Muy confortable" />
+				</h:selectOneMenu>
+				<h:outputText value="Matrícula" />
+				<h:inputText value="#{altaCocheBean.matricula}" />
+				<h:outputText value="Modelo" />
+				<h:inputText value="#{altaCocheBean.modelo}" />
+			</h:panelGrid>
+			<h:messages />
+			<h:commandButton value="Modificar"
+				actionListener="#{altaCocheBean.modificarCoche()}"></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/basicTemplate.xhtml">
+	<ui:define name="title">Registro de Usuarios</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nombre"></h:outputText>
+				<h:inputText label="Campo nombre" id="nombre" value="#{registroBean.nombre}" />
+				<h:outputText value="Apellidos"></h:outputText>
+				<h:inputText label="Campo apellidos" value="#{registroBean.apellidos}"></h:inputText>
+				<h:outputText value="Profesion"></h:outputText>
+				<h:inputText label="Campo profesion" value="#{registroBean.profesion}"></h:inputText>
+				<h:outputText value="Correo"></h:outputText>
+				<h:inputText label="Campo correo" value="#{registroBean.correo}"></h:inputText>
+				<h:outputText value="Usuario (4-10 max.)" />
+				<h:inputText label="Campo usuario" value="#{registroBean.usuario}">
+					<f:validateLength minimum="4" maximum="10" />
+				</h:inputText>
+				<h:outputText value="Clave"></h:outputText>
+				<h:inputSecret label="Campo clave" value="#{registroBean.clave}"></h:inputSecret>
+				<h:outputText value="Repetir Clave"></h:outputText>
+				<h:inputSecret label="Campo clave2" value="#{registroBean.clave2}"></h:inputSecret>
+				<h:outputText value="Fecha Nacimiento"></h:outputText>
+				<h:inputText label="Campo fecha" value="#{registroBean.fechaNacimiento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:inputText>
+			</h:panelGrid>
+			<h:messages id ="errors" infoStyle="color:blue"
+				warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+			<h:commandButton value="Registrar" action="#{registroBean.registro}"></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

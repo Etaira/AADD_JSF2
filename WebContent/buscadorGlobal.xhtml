@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title"> Buscador de viajes </ui:define>
+	<ui:define name="content">
+		<h:form id="bbcar">
+			<div style="margin-top: 10px; margin-bottom: 10px;">
+				<h:panelGroup id="panelBuscador">
+					<p:fieldset legend="Buscador" collapsed="false" toggleable="true">
+						<table class="form_table" style="margin: auto;">
+							<tr>
+								<td>Ciudad origen:</td>
+								<td><p:inputText
+										value="#{buscadorGlobalViajesList.ciudadOrigen}" /></td>
+								<td>Ciudad destino:</td>
+								<td><p:inputText
+										value="#{buscadorGlobalViajesList.ciudadDestino}" /></td>
+							</tr>
+							<tr>
+								<td>Fecha y hora:</td>
+								<td><p:datePicker id="time"
+										value="#{buscadorGlobalViajesList.fechaHora}" showTime="true" /></td>
+							</tr>
+						</table>
+						<div style="text-align: center;">
+							<p:commandButton value="Buscar"
+								actionListener="#{buscadorGlobalViajesList.buscar()}"
+								update="tabla_header" icon="ui-icon-search" />
+						</div>
+						<div style="margin: auto; text-align: center;">
+							<p:ajaxStatus>
+								<f:facet name="start">
+									<h:outputText value="Buscando" />
+								</f:facet>
+								<f:facet name="complete">
+									<h:outputText value="" />
+								</f:facet>
+							</p:ajaxStatus>
+						</div>
+					</p:fieldset>
+				</h:panelGroup>
+			</div>
+			<br />
+			<p:messages showDetail="true" id="info" />
+			<div style="clear: both;">
+				<p:dataTable var="viaje" value="#{buscadorGlobalViajesList.viajes}"
+					rows="10" id="tabla_header" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="25,50,100" style="width: 1100px;">
+					<p:column>
+						<f:facet name="header"> Dirección de origen</f:facet>
+						<h:outputText
+							value="#{viaje.origen.direccion.calle}, #{viaje.origen.direccion.numero}, CP: #{viaje.origen.direccion.CP} - #{viaje.origen.ciudad}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Dirección destino</f:facet>
+						<h:outputText
+							value="#{viaje.destino.direccion.calle},#{viaje.destino.direccion.numero}, CP: #{viaje.destino.direccion.CP} - #{viaje.destino.ciudad}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Fecha y hora de salida</f:facet>
+						<h:outputText value="#{viaje.origen.fecha}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Número de plazas totales</f:facet>
+						<h:outputText value="#{viaje.numPlazas}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Precios</f:facet>
+						<h:outputText value="#{viaje.precio} €" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Plazas libres</f:facet>
+						<h:outputText value="#{viaje.numPlazas - viaje.reservas.size()}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Opciones</f:facet>
+						<p:menuButton value="Opciones">
+							<p:menuitem value="Ver detalle" icon="ui-icon ui-icon-search"
+								url="detalleViaje.jsf?viajeId=#{viaje.id}" />
+							<p:menuitem value="Reservar viaje"
+								icon="ui-icon ui-icon-suitcase"
+								url="./reservas/form.jsf?viajeId=#{viaje.id}" />
+						</p:menuButton>
+					</p:column>
+				</p:dataTable>
+			</div>
+			<p:messages showDetail="true" id="info2" />
+		</h:form>
+	</ui:define>
+</ui:composition>

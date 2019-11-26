@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title"> Registrar un viaje </ui:define>
+	<ui:define name="content">
+		<h:form>
+				<h4>Parada Destino</h4>
+				<h:panelGrid columns="2">
+					<h:outputText value="Ciudad"></h:outputText>
+					<h:inputText id="nombre" value="#{paradaBean.ciudadDestino}" />
+					<h:outputText value="Calle" />
+					<h:inputText value="#{paradaBean.calleDestino}" />
+					<h:outputText value="Número" />
+					<h:inputText value="#{paradaBean.numeroDestino}" />
+					<h:outputText value="Código Postal" />
+					<h:inputText value="#{paradaBean.CPDestino}" />
+					<h:outputText value="Fecha" />
+					<h:inputText value="#{paradaBean.fechaDestino}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:inputText>
+				</h:panelGrid>
+				<h:messages />
+			<h:commandButton value="Registrar" actionListener="#{paradaBean.altaParadaDestino()}"></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

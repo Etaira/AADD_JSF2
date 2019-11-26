@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="content">
+		<h2>
+			<h:outputLabel
+				value="Bienvenido/a #{loginSessionBean.usuario.nombre}"></h:outputLabel>
+		</h2>
+		<h3>¿Que desea hacer?</h3>
+		<body>
+			<div class="columns">
+				<div style="float: left; width: 140px">
+					<h:outputLink value="formCoche.xhtml">Registrar mi coche</h:outputLink>
+					<br />
+					<h:outputLink value="modCoche.xhtml">Modificar mi coche</h:outputLink>
+					<br />
+					<!-- Falta implementar eliminarCoche() en AltaCocheBean -->
+					<!-- <h:outputLink value="">Eliminar mi coche</h:outputLink> -->
+					<h:outputLink value="formViaje.xhtml">Crear un viaje</h:outputLink>
+					<br />
+					<h:outputLink value="logout.xhtml">Logout</h:outputLink>
+				</div>
+				
+			</div>
+		</body>
+	</ui:define>
+</ui:composition>
+</html>

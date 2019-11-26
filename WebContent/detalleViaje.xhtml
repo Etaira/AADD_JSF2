@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title"> Detallador de viajes </ui:define>
+	<ui:define name="content">
+		<h:form id="bbcar">
+			<div style="clear: both;">
+				<p:dataTable var="viaje" value="#{detalleViaje.viaje}" id="tabla_header" style="width: 1100px;">
+					<p:column>
+						<f:facet name="header"> Dirección de origen</f:facet>
+						<h:outputText
+							value="#{viaje.origen.direccion.calle}, #{viaje.origen.direccion.numero}, CP: #{viaje.origen.direccion.CP} - #{viaje.origen.ciudad}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Dirección destino</f:facet>
+						<h:outputText
+							value="#{viaje.destino.direccion.calle},#{viaje.destino.direccion.numero}, CP: #{viaje.destino.direccion.CP} - #{viaje.destino.ciudad}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Fecha y hora de salida</f:facet>
+						<h:outputText value="#{viaje.origen.fecha}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Número de plazas totales</f:facet>
+						<h:outputText value="#{viaje.numPlazas}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Precios</f:facet>
+						<h:outputText value="#{viaje.precio} €" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Plazas libres</f:facet>
+						<h:outputText value="#{viaje.numPlazas - viaje.reservas.size()}" />
+					</p:column>
+				</p:dataTable>
+				<br/>
+				<p:dataTable var="coche" value="#{detalleViaje.coche}" id="coche_header" style="width: 1100px;" >
+					<p:column>
+						<f:facet name="header">Matricula</f:facet>
+						<h:outputText value="#{coche.matricula}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Modelo</f:facet>
+						<h:outputText value="#{coche.modelo}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Año</f:facet>
+						<h:outputText value="#{coche.anyo}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Confort</f:facet>
+						<h:outputText value="#{coche.confort}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Conductor</f:facet>
+						<h:outputText value="#{coche.propietario.nombre}" />
+					</p:column>
+				</p:dataTable>
+			</div>
+			<p:messages showDetail="true" id="info2" />
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title"> Registrar un viaje </ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h4>Parada Origen</h4>
+			<h:panelGrid columns="2">
+				<h:outputText value="Ciudad Origen"></h:outputText>
+				<h:inputText id="nombre" value="#{paradaBean.ciudadOrigen}" />
+				<h:outputText value="Calle Origen" />
+				<h:inputText value="#{paradaBean.calleOrigen}" />
+				<h:outputText value="Número Origen" />
+				<h:inputText value="#{paradaBean.numeroOrigen}" />
+				<h:outputText value="Código Postal Origen" />
+				<h:inputText value="#{paradaBean.CPOrigen}" />
+				<h:outputText value="Fecha Origen" />
+				<h:inputText value="#{paradaBean.fechaOrigen}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+				</h:inputText>
+			</h:panelGrid>
+			<h:messages />
+			<h:commandButton value="Siguiente"
+				actionListener="#{paradaBean.altaParadaOrigen()}"></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

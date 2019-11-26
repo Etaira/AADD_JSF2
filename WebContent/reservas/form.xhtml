@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/templates/privateTemplate.xhtml">
+	<ui:define name="title">
+Reservar viaje
+</ui:define>
+	<ui:define name="content">
+		<h:form id="bbcar">
+			<ui:fragment rendered="#{reservaBean.error}">
+				<h3 style="color: red; text-align: center;">Navegacion
+					incorrecta</h3>
+			</ui:fragment>
+			<ui:fragment rendered="#{not reservaBean.error}">
+				<table class="form_table">
+					<tr>
+						<td>Comentario:</td>
+						<td><p:inputTextarea rows="4"
+								value="#{reservaBean.comentario}" /></td>
+					</tr>
+				</table>
+				<div style="margin-bottom: 5px;">
+					<p:commandButton value="Aceptar"
+						actionListener="#{reservaBean.crearReserva()}"
+						icon="ui-icon ui-icon-disk" update="mensajes"
+						oncomplete="PF('dialog').show();" />
+				</div>
+				<p:dialog header="Mensaje" modal="true" widgetVar="dialog"
+					width="650">
+					<p:outputPanel id="mensajes" style="margin: 10px;">
+						<p:messages showDetail="true" showSummary="true" />
+						<ui:fragment rendered="#{reservaBean.reservaId == null}">
+							<p:commandButton value="Cerrar" onclick="PF('dialog').hide();" />
+						</ui:fragment>
+						<ui:fragment rendered="#{reservaBean.reservaId != null}">
+							<p:button value="Buscar viajes" href="../buscadorGlobal.jsf" />
+							<p:button value="Ver mis reservar" href="list.jsf" />
+							<p:button value="Editar reserva" href="fordEdit.jsf" />
+						</ui:fragment>
+					</p:outputPanel>
+				</p:dialog>
+			</ui:fragment>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
